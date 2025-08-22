@@ -834,7 +834,7 @@ Xiaomi,Redmi Note 10,64GB,Green,Scrap,60,40,1,
 </details>
 {% endblock %}
 """
-
+#cool
 # Make base template available to others
 app.jinja_env.globals['TPL_BASE'] = TPL_BASE
 
