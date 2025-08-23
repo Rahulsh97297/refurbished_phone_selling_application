@@ -1,0 +1,32 @@
+{% extends 'base.html' %} {% block content %}
+<h2>Phone Inventory</h2>
+<a href="{{ url_for('inventory.add_phone') }}">Add New Phone</a>
+<table border="1" cellpadding="5">
+  <tr>
+    <th>ID</th>
+    <th>Brand</th>
+    <th>Model</th>
+    <th>Price</th>
+    <th>Condition</th>
+    <th>Action</th>
+  </tr>
+  {% for phone in phones %}
+  <tr>
+    <td>{{ phone.id }}</td>
+    <td>{{ phone.brand }}</td>
+    <td>{{ phone.model }}</td>
+    <td>{{ phone.price }}</td>
+    <td>{{ phone.condition }}</td>
+    <td>
+      <a href="{{ url_for('inventory.edit_phone', phone_id=phone.id) }}"
+        >Edit</a
+      >
+      |
+      <a href="{{ url_for('inventory.delete_phone', phone_id=phone.id) }}"
+        >Delete</a
+      >
+    </td>
+  </tr>
+  {% endfor %}
+</table>
+{% endblock %}
