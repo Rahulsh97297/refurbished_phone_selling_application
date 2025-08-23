@@ -1,0 +1,703 @@
+/* === Minimal Modern Reset === */
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+}
+
+html,
+body {
+    height: 100%;
+}
+
+body,
+h1,
+h2,
+h3,
+h4,
+p,
+figure,
+blockquote,
+dl,
+dd {
+    margin: 0;
+}
+
+ul[role="list"],
+ol[role="list"] {
+    list-style: none;
+}
+
+img {
+    max-width: 100%;
+    display: block;
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+}
+
+button,
+input,
+select,
+textarea {
+    font: inherit;
+}
+
+:focus-visible {
+    outline: 2px solid var(--focus);
+    outline-offset: 2px;
+}
+
+/* === Theme Tokens === */
+:root {
+    --brand: hsl(222 85% 55%);
+    --brand-600: hsl(222 85% 50%);
+    --brand-700: hsl(222 85% 45%);
+    --accent: hsl(14 90% 55%);
+    --ok: hsl(160 70% 40%);
+    --warn: hsl(45 95% 50%);
+    --danger: hsl(0 70% 55%);
+    --bg: hsl(0 0% 100%);
+    --surface: hsl(0 0% 100%);
+    --elev: hsl(0 0% 98%);
+    --border: hsl(0 0% 88%);
+    --text: hsl(220 25% 16%);
+    --muted: hsl(220 10% 45%);
+    --focus: hsl(200 100% 40% / .6);
+    --shadow: 0 10px 20px hsl(220 10% 20% / .08), 0 2px 6px hsl(220 10% 20% / .06);
+
+    --radius: 14px;
+    --radius-sm: 10px;
+    --radius-xs: 8px;
+
+    --sp-1: .25rem;
+    /* 4px  */
+    --sp-2: .5rem;
+    /* 8px  */
+    --sp-3: .75rem;
+    /* 12px */
+    --sp-4: 1rem;
+    /* 16px */
+    --sp-5: 1.5rem;
+    /* 24px */
+    --sp-6: 2rem;
+    /* 32px */
+    --sp-7: 3rem;
+    /* 48px */
+
+    --font-sys: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", "Apple Color Emoji", "Segoe UI Emoji";
+    --font-mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", monospace;
+
+    --fs-1: clamp(.95rem, .9rem + .3vw, 1.05rem);
+    --fs-2: clamp(1.05rem, 1rem + .5vw, 1.25rem);
+    --fs-3: clamp(1.35rem, 1.1rem + .9vw, 1.6rem);
+    --fs-4: clamp(1.8rem, 1.3rem + 1.6vw, 2.2rem);
+}
+
+@media (prefers-color-scheme: dark) {
+    :root {
+        --bg: hsl(222 28% 8%);
+        --surface: hsl(222 26% 10%);
+        --elev: hsl(222 22% 13%);
+        --border: hsl(222 16% 22%);
+        --text: hsl(0 0% 98%);
+        --muted: hsl(220 10% 70%);
+        --shadow: 0 10px 24px hsl(220 40% 2% / .5), 0 2px 8px hsl(220 50% 2% / .4);
+    }
+}
+
+/* Optional manual dark mode: wrap body in .theme-dark */
+.theme-dark {
+    --bg: hsl(222 28% 8%);
+    --surface: hsl(222 26% 10%);
+    --elev: hsl(222 22% 13%);
+    --border: hsl(222 16% 22%);
+    --text: hsl(0 0% 98%);
+    --muted: hsl(220 10% 70%);
+    --shadow: 0 10px 24px hsl(220 40% 2% / .5), 0 2px 8px hsl(220 50% 2% / .4);
+}
+
+/* === Base === */
+html {
+    color-scheme: light dark;
+}
+
+body {
+    font-family: var(--font-sys);
+    font-size: var(--fs-1);
+    background: radial-gradient(1200px 600px at 10% -10%, hsl(210 100% 97%), transparent),
+        radial-gradient(1000px 600px at 110% 10%, hsl(280 100% 98%), transparent),
+        var(--bg);
+    color: var(--text);
+    line-height: 1.55;
+    padding: var(--sp-6) max(4vw, var(--sp-6));
+    accent-color: var(--brand);
+}
+
+h1 {
+    font-size: var(--fs-4);
+    letter-spacing: -0.02em;
+}
+
+h2 {
+    font-size: var(--fs-3);
+    letter-spacing: -0.015em;
+}
+
+h3 {
+    font-size: var(--fs-2);
+}
+
+p,
+ul,
+ol {
+    color: var(--text);
+}
+
+.muted {
+    color: var(--muted);
+}
+
+/* Links */
+a {
+    color: var(--brand);
+}
+
+a:hover {
+    color: var(--brand-700);
+}
+
+/* === Layout helpers === */
+.container {
+    max-width: 1100px;
+    margin-inline: auto;
+}
+
+.stack {
+    display: grid;
+    gap: var(--sp-4);
+}
+
+.stack-lg {
+    display: grid;
+    gap: var(--sp-6);
+}
+
+.cluster {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--sp-3);
+    align-items: center;
+}
+
+.center {
+    display: grid;
+    place-items: center;
+}
+
+.grid {
+    display: grid;
+    gap: var(--sp-4);
+    grid-template-columns: repeat(12, 1fr);
+}
+
+.col-12 {
+    grid-column: span 12;
+}
+
+.col-6 {
+    grid-column: span 6;
+}
+
+.col-4 {
+    grid-column: span 4;
+}
+
+.col-3 {
+    grid-column: span 3;
+}
+
+@media (max-width: 900px) {
+
+    .col-6,
+    .col-4,
+    .col-3 {
+        grid-column: span 12;
+    }
+}
+
+/* Spacing utils */
+.mt-1 {
+    margin-top: var(--sp-2);
+}
+
+.mt-2 {
+    margin-top: var(--sp-4);
+}
+
+.mt-3 {
+    margin-top: var(--sp-5);
+}
+
+.mb-1 {
+    margin-bottom: var(--sp-2);
+}
+
+.mb-2 {
+    margin-bottom: var(--sp-4);
+}
+
+.mb-3 {
+    margin-bottom: var(--sp-5);
+}
+
+.p-1 {
+    padding: var(--sp-2);
+}
+
+.p-2 {
+    padding: var(--sp-4);
+}
+
+.p-3 {
+    padding: var(--sp-5);
+}
+
+.text-center {
+    text-align: center;
+}
+
+.w-100 {
+    width: 100%;
+}
+
+/* === Navigation === */
+.navbar {
+    background: linear-gradient(180deg, var(--surface), var(--elev));
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: var(--sp-3) var(--sp-4);
+    box-shadow: var(--shadow);
+}
+
+.navbar .brand {
+    font-weight: 700;
+    color: var(--brand);
+}
+
+.navbar a {
+    padding: .4rem .7rem;
+    border-radius: 10px;
+    color: var(--text);
+}
+
+.navbar a:hover {
+    background: hsl(0 0% 100% / .5);
+}
+
+.theme-dark .navbar a:hover {
+    background: hsl(0 0% 100% / .06);
+}
+
+/* === Card === */
+.card {
+    background: linear-gradient(180deg, var(--surface), var(--elev));
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+    overflow: clip;
+}
+
+.card-header {
+    padding: var(--sp-4) var(--sp-5);
+    border-bottom: 1px solid var(--border);
+    font-weight: 600;
+}
+
+.card-body {
+    padding: var(--sp-5);
+}
+
+.card-footer {
+    padding: var(--sp-4) var(--sp-5);
+    border-top: 1px solid var(--border);
+}
+
+/* === Buttons === */
+.btn {
+    --_bg: var(--elev);
+    --_fg: var(--text);
+    --_bd: var(--border);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: .5rem;
+    border: 1px solid var(--_bd);
+    background: var(--_bg);
+    color: var(--_fg);
+    padding: .6rem 1rem;
+    border-radius: 12px;
+    cursor: pointer;
+    transition: transform .05s ease, background .2s ease, border-color .2s;
+    box-shadow: 0 1px 0 hsl(0 0% 100% / .5) inset, 0 1px 2px hsl(220 20% 20% / .08);
+}
+
+.btn:hover {
+    transform: translateY(-1px);
+}
+
+.btn:active {
+    transform: translateY(0);
+}
+
+.btn-primary {
+    --_bg: var(--brand);
+    --_fg: white;
+    --_bd: color-mix(in oklab, var(--brand) 80%, black);
+}
+
+.btn-accent {
+    --_bg: var(--accent);
+    --_fg: white;
+    --_bd: color-mix(in oklab, var(--accent) 80%, black);
+}
+
+.btn-outline {
+    --_bg: transparent;
+    --_fg: var(--brand);
+    --_bd: var(--brand-600);
+}
+
+.btn-ghost {
+    --_bg: transparent;
+    --_fg: var(--text);
+    --_bd: transparent;
+}
+
+.btn-danger {
+    --_bg: var(--danger);
+    --_fg: white;
+    --_bd: color-mix(in oklab, var(--danger) 80%, black);
+}
+
+.btn-sm {
+    padding: .4rem .7rem;
+    font-size: .9em;
+    border-radius: 10px;
+}
+
+.btn-lg {
+    padding: .85rem 1.2rem;
+    font-size: 1.05em;
+    border-radius: 14px;
+}
+
+/* Icon-only buttons */
+.icon-btn {
+    width: 2.2rem;
+    height: 2.2rem;
+    display: grid;
+    place-items: center;
+    border-radius: 10px;
+    border: 1px solid var(--border);
+    background: var(--elev);
+}
+
+/* === Badges / Pills === */
+.badge {
+    display: inline-block;
+    padding: .15rem .5rem;
+    border-radius: 999px;
+    border: 1px solid var(--border);
+    background: var(--elev);
+    font-size: .85em;
+    color: var(--muted);
+}
+
+.pill {
+    display: inline-block;
+    padding: .25rem .65rem;
+    border-radius: 999px;
+    background: hsl(210 60% 96%);
+    color: hsl(210 60% 35%);
+}
+
+.theme-dark .pill {
+    background: hsl(210 40% 18%);
+    color: hsl(210 60% 80%);
+}
+
+/* === Alerts === */
+.alert {
+    border-radius: var(--radius-sm);
+    padding: .9rem 1rem;
+    border: 1px solid var(--border);
+    background: var(--elev);
+}
+
+.alert.info {
+    border-color: color-mix(in oklab, var(--brand) 25%, var(--border));
+    background: color-mix(in oklab, var(--brand) 6%, var(--elev));
+}
+
+.alert.success {
+    border-color: color-mix(in oklab, var(--ok) 25%, var(--border));
+    background: color-mix(in oklab, var(--ok) 6%, var(--elev));
+}
+
+.alert.warn {
+    border-color: color-mix(in oklab, var(--warn) 25%, var(--border));
+    background: color-mix(in oklab, var(--warn) 10%, var(--elev));
+}
+
+.alert.danger {
+    border-color: color-mix(in oklab, var(--danger) 25%, var(--border));
+    background: color-mix(in oklab, var(--danger) 8%, var(--elev));
+}
+
+/* === Tables === */
+.table-wrap {
+    width: 100%;
+    overflow: auto;
+    border-radius: var(--radius);
+    border: 1px solid var(--border);
+    background: var(--surface);
+    box-shadow: var(--shadow);
+}
+
+table.table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: .98em;
+}
+
+.table th,
+.table td {
+    padding: .75rem 1rem;
+    border-bottom: 1px solid var(--border);
+    text-align: left;
+    vertical-align: middle;
+}
+
+.table th {
+    background: linear-gradient(180deg, var(--surface), var(--elev));
+    position: sticky;
+    top: 0;
+    z-index: 1;
+}
+
+.table tr:hover td {
+    background: color-mix(in oklab, var(--brand) 3%, transparent);
+}
+
+.table.striped tbody tr:nth-child(odd) td {
+    background: color-mix(in oklab, var(--brand) 2%, transparent);
+}
+
+/* === Forms === */
+.field {
+    display: grid;
+    gap: .4rem;
+}
+
+label {
+    color: var(--muted);
+    font-size: .92em;
+}
+
+input[type="text"],
+input[type="number"],
+input[type="search"],
+input[type="email"],
+select,
+textarea {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    color: var(--text);
+    border-radius: 10px;
+    padding: .65rem .8rem;
+    transition: border-color .2s, box-shadow .2s, background .2s;
+}
+
+input::placeholder,
+textarea::placeholder {
+    color: hsl(0 0% 55%);
+}
+
+input:focus,
+select:focus,
+textarea:focus {
+    border-color: color-mix(in oklab, var(--brand) 40%, var(--border));
+    box-shadow: 0 0 0 4px hsl(222 85% 55% / .12);
+}
+
+input[aria-invalid="true"],
+.is-invalid {
+    border-color: var(--danger);
+    box-shadow: 0 0 0 4px hsl(0 70% 55% / .15);
+}
+
+/* Input group */
+.input-group {
+    display: flex;
+    align-items: stretch;
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    overflow: hidden;
+    background: var(--surface);
+}
+
+.input-group>input {
+    border: 0;
+    border-radius: 0;
+    flex: 1 1 auto;
+}
+
+.input-group>.btn {
+    border: 0;
+    border-left: 1px solid var(--border);
+    border-radius: 0;
+}
+
+/* === Table Toolbar / Header Actions === */
+.toolbar {
+    display: flex;
+    gap: var(--sp-3);
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    padding: var(--sp-3);
+}
+
+/* === Toast (simple) === */
+.toast {
+    position: fixed;
+    right: var(--sp-5);
+    bottom: var(--sp-5);
+    z-index: 1000;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    box-shadow: var(--shadow);
+    border-radius: 12px;
+    padding: .75rem 1rem;
+    display: flex;
+    gap: .6rem;
+    align-items: center;
+    animation: slide-up .25s ease-out both;
+}
+
+/* === Skeleton === */
+.skeleton {
+    --sk: color-mix(in oklab, var(--border) 50%, var(--elev));
+    background: linear-gradient(90deg, var(--elev), var(--sk), var(--elev));
+    background-size: 240% 100%;
+    animation: shimmer 1.8s infinite linear;
+    border-radius: 10px;
+    min-height: 1rem;
+}
+
+/* === Code blocks === */
+code,
+pre {
+    font-family: var(--font-mono);
+    background: var(--elev);
+    padding: .2rem .35rem;
+    border-radius: 8px;
+    border: 1px solid var(--border);
+}
+
+pre {
+    padding: .75rem 1rem;
+    overflow: auto;
+}
+
+/* === Animations === */
+@keyframes shimmer {
+    0% {
+        background-position: 200% 0;
+    }
+
+    100% {
+        background-position: -40% 0;
+    }
+}
+
+@keyframes slide-up {
+    from {
+        transform: translateY(8px);
+        opacity: .001;
+    }
+
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+/* === Page header sample === */
+.page-header {
+    display: flex;
+    align-items: end;
+    justify-content: space-between;
+    gap: var(--sp-4);
+    margin-bottom: var(--sp-5);
+}
+
+.page-header h1 {
+    line-height: 1.1;
+}
+
+/* === Table status chips === */
+.status {
+    display: inline-flex;
+    align-items: center;
+    gap: .4rem;
+    padding: .25rem .55rem;
+    border-radius: 999px;
+    font-size: .85em;
+    border: 1px solid var(--border);
+    background: var(--elev);
+}
+
+.status.ok {
+    color: var(--ok);
+    border-color: color-mix(in oklab, var(--ok) 40%, var(--border));
+}
+
+.status.warn {
+    color: var(--warn);
+    border-color: color-mix(in oklab, var(--warn) 40%, var(--border));
+}
+
+.status.danger {
+    color: var(--danger);
+    border-color: color-mix(in oklab, var(--danger) 40%, var(--border));
+}
+
+/* === Table actions (inline) === */
+.table-actions {
+    display: flex;
+    gap: .4rem;
+}
+
+.table-actions .icon-btn {
+    border-color: var(--border);
+    background: var(--surface);
+}
+
+.table-actions .icon-btn:hover {
+    background: color-mix(in oklab, var(--brand) 6%, var(--surface));
+}
+
+/* === Footer === */
+.footer {
+    margin-top: var(--sp-6);
+    color: var(--muted);
+    font-size: .92em;
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: var(--sp-3);
+}
