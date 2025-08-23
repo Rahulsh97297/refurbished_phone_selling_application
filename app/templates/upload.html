@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+{% block content %}
+<h3>Bulk Upload (CSV)</h3>
+<p>CSV headers: brand, model, storage, color, condition, base_price, stock_qty, tags, discontinued</p>
+<form id="up" method="post" enctype="multipart/form-data">
+  <input type="file" name="file" accept=".csv" required>
+  <button type="submit">Upload</button>
+</form>
+<script>
+document.getElementById('up').addEventListener('submit', (e)=>{
+  const key = localStorage.getItem('API_KEY') || prompt('Enter API key (default demo-api-key):','demo-api-key');
+  localStorage.setItem('API_KEY', key);
+  e.preventDefault();
+  const form = e.target;
+  fetch('/phones/upload', {method:'POST', body: new FormData(form), headers:{'X-API-KEY': key}})
+  .then(r=>r.json()).then(j=> alert('Created: '+(j.created||0)));
+});
+</script>
+{% endblock %}

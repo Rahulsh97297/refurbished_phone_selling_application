@@ -1,0 +1,45 @@
+{% extends "base.html" %}
+{% block content %}
+<h3>Inventory</h3>
+<table>
+  <thead>
+    <tr>
+      <th>ID</th><th>Brand</th><th>Model</th><th>Cond</th><th>Stock</th>
+      <th>Base</th><th>X</th><th>Y</th><th>Z</th><th>Tags</th><th>Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+  {% for p in phones %}
+    <tr>
+      <td>{{p.id}}</td>
+      <td>{{p.brand}}</td>
+      <td>{{p.model}}</td>
+      <td>{{p.condition}}</td>
+      <td>{{p.stock_qty}}</td>
+      <td>{{"%.2f"|format(p.base_price)}}</td>
+      <td>{{p.price_x}}</td>
+      <td>{{p.price_y}}</td>
+      <td>{{p.price_z}}</td>
+      <td>{% if p.tags %}<span class="pill">{{p.tags}}</span>{% endif %}{% if p.discontinued %}<span class="pill">discontinued</span>{% endif %}</td>
+      <td class="actions">
+        <a href="/phones/new?edit={{p.id}}">Edit</a>
+        <a href="#" onclick="listOn('X', {{p.id}})">List X</a>
+        <a href="#" onclick="listOn('Y', {{p.id}})">List Y</a>
+        <a href="#" onclick="listOn('Z', {{p.id}})">List Z</a>
+      </td>
+    </tr>
+  {% endfor %}
+  </tbody>
+</table>
+
+<script>
+async function listOn(platform, id){
+  const r = await fetch(`/platforms/list/${platform}/${id}`, {
+    method: 'POST',
+    headers: {'X-API-KEY': (localStorage.getItem('API_KEY')||'demo-api-key')}
+  });
+  const j = await r.json();
+  alert(`${platform}: ${j.status} ${j.reason?('- '+j.reason):''}`);
+}
+</script>
+{% endblock %}
