@@ -1,0 +1,9 @@
+brand,model,storage,color,condition,base_price,stock_qty,tags,discontinued
+Apple,iPhone 12,128GB,Black,New,45000,10,flagship,False
+Apple,iPhone 11,64GB,White,Good,30000,5,budget,False
+Samsung,Galaxy S21,256GB,Gray,New,50000,8,android,False
+Samsung,Galaxy Note 10,128GB,Blue,Scrap,20000,2,phablet,False
+OnePlus,OnePlus 9,128GB,Green,Good,35000,6,performance,False
+Xiaomi,Redmi Note 10,64GB,Silver,New,15000,15,budget,False
+Google,Pixel 5,128GB,Black,Good,28000,4,stock-android,False
+Nokia,Nokia 7.2,64GB,Blue,Scrap,10000,1,legacy,True

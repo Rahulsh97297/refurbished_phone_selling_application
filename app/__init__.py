@@ -1,5 +1,5 @@
 # app/__init__.py
-from flask import Flask, render_template
+from flask import Flask, redirect, url_for
 from dotenv import load_dotenv
 from .extensions import db
 from .routes.phones import bp as phones_bp
@@ -23,6 +23,7 @@ def create_app():
 
     @app.get("/")
     def index():
-        return render_template("index.html")
+        # FIX: avoid rendering template without 'phones' context; send user to list page
+        return redirect(url_for("phones.list_phones_ui"))
 
     return app
