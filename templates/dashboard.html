@@ -1,0 +1,46 @@
+{% extends "base.html" %} {% block body %}
+<h2>Dashboard</h2>
+<a href="{{ url_for('add_phone') }}" class="btn btn-success mb-3">Add Phone</a>
+<a href="{{ url_for('logout') }}" class="btn btn-secondary mb-3">Logout</a>
+
+<table class="table table-bordered">
+  <tr>
+    <th>ID</th>
+    <th>Brand</th>
+    <th>Model</th>
+    <th>Price</th>
+    <th>Condition</th>
+    <th>Description</th>
+    <th>Actions</th>
+  </tr>
+  {% for r in rows %}
+  <tr>
+    <td>{{ r.id }}</td>
+    <td>{{ r.brand }}</td>
+    <td>{{ r.model }}</td>
+    <td>{{ r.price }}</td>
+    <td>{{ r.condition }}</td>
+    <td>{{ r.description }}</td>
+    <td>
+      <a
+        class="btn btn-sm btn-warning"
+        href="{{ url_for('edit_phone', id=r.id) }}"
+        >Edit</a
+      >
+      <form
+        style="display: inline"
+        method="post"
+        action="{{ url_for('delete_phone', id=r.id) }}"
+      >
+        <button
+          class="btn btn-sm btn-danger"
+          onclick="return confirm('Delete?')"
+        >
+          Delete
+        </button>
+      </form>
+    </td>
+  </tr>
+  {% endfor %}
+</table>
+{% endblock %}

@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+{% block body %}
+<h2>{{ action }} Phone</h2>
+<form method="post">
+  <input class="form-control mb-2" name="brand" placeholder="Brand" value="{{ phone.brand if phone }}">
+  <input class="form-control mb-2" name="model" placeholder="Model" value="{{ phone.model if phone }}">
+  <input class="form-control mb-2" name="price" placeholder="Price" value="{{ phone.price if phone }}">
+  <select class="form-control mb-2" name="condition">
+    {% for c in conditions %}
+      <option value="{{c}}" {% if phone and phone.condition==c %}selected{% endif %}>{{c}}</option>
+    {% endfor %}
+  </select>
+  <textarea class="form-control mb-2" name="description" placeholder="Description">{{ phone.description if phone }}</textarea>
+  <button class="btn btn-primary">{{ action }}</button>
+</form>
+{% endblock %}
